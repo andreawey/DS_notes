@@ -1,0 +1,1 @@
+Outliers are data objects with characteristics that are considerably different than most of the other data objects in the data set.

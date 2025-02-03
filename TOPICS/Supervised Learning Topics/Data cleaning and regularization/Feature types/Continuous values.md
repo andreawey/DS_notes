@@ -1,0 +1,3 @@
+- Has real numbers as values
+- can only be measured and represented using a finite number of digits
+- Typically floating point variables

@@ -1,0 +1,2 @@
+- Gradient [[Boosting]] works by sequentially adding predictors to an ensemble, each one correcting its predecessor (like [[AdaBoost]])
+- However this method tries to fit the new predictor to the residual errors made by the previous predictor

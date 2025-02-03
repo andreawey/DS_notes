@@ -1,0 +1,3 @@
+- This is a version of [[Gradient Boost]] where only a fraction of the training instances is used for training each tree
+- This trades a higher bias for a lower variance
+- It speeds up training considerably

@@ -1,0 +1,5 @@
+- it is the coefficient of determination
+- it is a measure of goodness of a prediction for a regression model
+- yields a score between 0 and 1 
+- a value of 1 corresponds to a perfect prediction
+- a value of 0 corresponds to a constant model that just predicts the mean of the training set responses
