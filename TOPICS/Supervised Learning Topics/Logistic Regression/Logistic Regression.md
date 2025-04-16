@@ -1,4 +1,4 @@
-- Some regression algorithms can be used for classification as well
+<- Some regression algorithms can be used for classification as well
 - Logistic regression is commonly used to estimate the probability that an instance belongs to a particular class
 	- it is used as a binary classifier when prob >0.5 then label 1 else label 0
 
