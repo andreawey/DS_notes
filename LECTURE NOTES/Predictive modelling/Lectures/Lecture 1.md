@@ -1,17 +1,3 @@
-
-**Prediction**: predict for new values
-**Inference**: understand how the output value is affected by a change of the predictor variables
-
-
-RESIDUAL SUM OF SQUARES
-RESIDUAL STANDARD ERROR
-
-review t-test in linear regression
-- python does it for you 
-- know how to interpret the p value
-
-
-
 ## Introduction to Regression Analysis
 
 ### Statistical Regression Analysis
@@ -159,7 +145,18 @@ For a given value $x_0$ of the predictor, the expected value of the predicted re
 > 
 > Where: $$\text{se}(y_0)^2 = \hat{\sigma}^2\left(1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{\sum_{i=1}^{n}(x_i - \bar{x})^2}\right)$$
 
+| Use Case                                | Formula                                       |
+| --------------------------------------- | --------------------------------------------- |
+| Predicting **mean** income at `x₀`      | $$σ² * (1/n + (x₀ - x̄)² / Σ(xᵢ - x̄)²)$$     |
+| Predicting **new income value** at `x₀` | $$σ² * (1 + 1/n + (x₀ - x̄)² / Σ(xᵢ - x̄)²)$$ |
+|                                         |                                               |
+
 > [!note] Prediction intervals are always wider than confidence intervals for the same predictor value.
+
+
+$$ \sum_{i=1}^n (x_i - \bar{x})^2 = (n - 1)s_x^2 $$
+where $s_x$ is the sample standard deviation of the predictor variable
+
 
 ## Examples
 
