@@ -177,6 +177,82 @@ def comprehensive_model_diagnostics(model, figsize=(15, 12)):
     
     plt.tight_layout()
     return fig
+
+
+# don't leave this in the notebook :
+def summarize_model_diagnostics(model):
+    """
+    Generate textual summary for regression diagnostics based on residual patterns.
+
+    Parameters:
+    - model: fitted statsmodels regression model
+
+    Returns:
+    - report: dictionary with plot-type keys and diagnostic comment values
+    """
+    report = {}
+
+    # Extract components
+    yfit = model.fittedvalues
+    res = model.resid
+    res_inf = model.get_influence()
+    res_standard = res_inf.resid_studentized_internal
+    res_stand_sqrt = np.sqrt(np.abs(res_standard))
+    leverage = res_inf.hat_matrix_diag
+    cooks_d = res_inf.cooks_distance[0]
+    
+    # 1. Residuals vs Fitted
+    if np.corrcoef(yfit, res)[0, 1] > 0.1:
+        comment = "Residuals show correlation with fitted values — possible nonlinearity or model misspecification."
+    elif np.var(res) < 1e-5:
+        comment = "Residuals show very low variance — check for overfitting or poor model fit."
+    else:
+        comment = "Residuals are roughly uncorrelated with fitted values — linearity assumption seems reasonable."
+    report['Residuals vs Fitted'] = comment
+
+    # 2. Q-Q Plot
+    sorted_resid = np.sort(res_standard[~np.isnan(res_standard)])
+    norm_quantiles = np.sort(np.random.normal(0, 1, size=len(sorted_resid)))
+    qq_diff = np.mean(np.abs(sorted_resid - norm_quantiles))
+    if qq_diff > 0.5:
+        comment = "Standardized residuals deviate strongly from normal — normality assumption likely violated."
+    elif qq_diff > 0.2:
+        comment = "Mild deviations from normality in residuals — may impact inference."
+    else:
+        comment = "Residuals appear approximately normal — normality assumption likely satisfied."
+    report['Normal Q-Q Plot'] = comment
+
+    # 3. Scale-Location Plot
+    trend = np.corrcoef(yfit, res_stand_sqrt)[0, 1]
+    if trend > 0.2:
+        comment = "Spread of residuals increases with fitted values — possible heteroscedasticity."
+    elif trend < -0.2:
+        comment = "Spread of residuals decreases with fitted values — possible heteroscedasticity."
+    else:
+        comment = "Spread of residuals appears constant — homoscedasticity assumption likely satisfied."
+    report['Scale-Location Plot'] = comment
+
+    # 4. Residuals vs Leverage (Cook’s Distance)
+    high_leverage = np.sum(leverage > 2 * np.mean(leverage))
+    high_cook = np.sum(cooks_d > 4 / len(leverage))
+    issues = []
+    if high_leverage > 0:
+        issues.append(f"{high_leverage} high-leverage point(s)")
+    if high_cook > 0:
+        issues.append(f"{high_cook} influential point(s) (Cook's D > 4/n)")
+    if issues:
+        comment = "Potential influence issues: " + ", ".join(issues) + ". Check for outliers or leverage."
+    else:
+        comment = "No major leverage or influential point concerns."
+    report["Residuals vs Leverage"] = comment
+
+    return report
+
+# usage :
+diagnostic_summary = summarize_model_diagnostics(model)
+for plot, comment in diagnostic_summary.items():
+    print(f"{plot}:\n  → {comment}\n")
+
 ```
 
 regression plot
@@ -1242,3 +1318,75 @@ def arima_analysis(ts, max_p=3, max_d=2, max_q=3, seasonal=False, m=12):
     return best_model, results_df
 
 ```
+
+
+## Autocorrelation linear process 
+calculates $p(h)$ autocorrelation at any lag $h$ assuming white noise variance $variance = 1$
+
+
+for example $$X_k = W_k + \frac{1}{2} W_{k-1} - \frac{2}{3} W_{k-2}$$
+autocorrelation_linear_process([1, 1/2, -2/3], 1)
+
+```python 
+def autocorrelation_linear_process(coeffs, lag):
+    """
+    Compute the autocorrelation at given lag for the process
+    X_k = sum_{i=0}^p a_i * W_{k-i},
+    where W_k is white noise with variance 1.
+
+    Args:
+        coeffs (list or array): coefficients [a0, a1, ..., ap]
+        lag (int): lag h for autocorrelation
+
+    Returns:
+        float: autocorrelation rho(h)
+    """
+    p = len(coeffs) - 1
+
+    # Variance Var(X_k) = sum of squares of coefficients
+    var_X = sum(a ** 2 for a in coeffs)
+
+    # Covariance Cov(X_k, X_{k-lag})
+    # Only terms where indices overlap: sum over i of a_i * a_{i+lag}
+    cov = 0.0
+    for i in range(p + 1):
+        j = i + lag
+        if j <= p:
+            cov += coeffs[i] * coeffs[j]
+
+    # Autocorrelation = covariance / variance
+    rho = cov / var_X
+    return rho
+
+
+# Example: your original problem coefficients
+coefficients = [1, 0.5, -2/3]
+
+lag_1_autocorr = autocorrelation_linear_process(coefficients, 1)
+print(f"Autocorrelation at lag 1: {lag_1_autocorr:.6f}")
+
+```
+
+
+
+![[Pasted image 20250624201246.png]]
+A: Moving Average
+B: Auto regressive
+C: Random Walk
+D: White noise
+
+
+![[Pasted image 20250624202651.png]]
+**(A) MA, (B) AR, (C) RW, (D) WN**
+
+![[Pasted image 20250624203000.png]]
+
+Based on the analysis:
+
+1. **Is the process autoregressive?** Yes, because the ACF tails off exponentially and the PACF cuts off.
+    
+2. **Estimate the model order p:** The PACF cuts off after lag 2. This means that the partial autocorrelations are significant at lags 1 and 2, and then become non-significant from lag 3 onwards.
+    
+
+Therefore, the process appears to be an **Autoregressive (AR) process of order 2**, or **AR(2)**.
+

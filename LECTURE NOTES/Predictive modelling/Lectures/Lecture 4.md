@@ -91,6 +91,8 @@ $$\text{adjusted } R^2 = 1 - \frac{\text{RSS}/(n-p-1)}{\text{TSS}/(n-1)}$$
 $$\text{AIC} = -2\log(L) + 2q$$
 
 For linear regression with normal errors: $$\text{AIC} = \frac{1}{n\hat{\sigma}^2}(\text{RSS} + 2p\hat{\sigma}^2)$$
+> [!info] **Akaike Information Criterion (AIC)** aims to find the model that best balances **goodness of fit** and **model complexity**
+> Lower -> better model
 
 ### Mallow's Cp Statistic
 

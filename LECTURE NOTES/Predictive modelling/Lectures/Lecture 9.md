@@ -2,7 +2,8 @@
 
 ## Autoregressive Model AR(p)
 
-> [!definition] AR(p) Model The autoregressive model of order p is a discrete stochastic process that satisfies: $$X_n = a_1X_{n-1} + a_2X_{n-2} + \cdots + a_pX_{n-p} + W_n$$ where $a_1, a_2, \ldots, a_p$ are the model parameters and $W_1, W_2, \ldots$ is a white noise process with variance $\sigma^2$.
+> [!definition] AR(p) Model 
+> The autoregressive model of order p is a discrete stochastic process that satisfies: $$X_n = a_1X_{n-1} + a_2X_{n-2} + \cdots + a_pX_{n-p} + W_n$$ where $a_1, a_2, \ldots, a_p$ are the model parameters and $W_1, W_2, \ldots$ is a white noise process with variance $\sigma^2$.
 
 > [!info] AR(p) Intuition Autoregressive models are based on the idea that the current value of the series, $X_n$, can be explained as a linear combination of $p$ past values, together with an additive random error.
 
@@ -33,7 +34,8 @@
 
 ## Moving Average Model MA(q)
 
-> [!definition] MA(q) Model The moving average model of order q is a discrete stochastic process that satisfies: $$X_n = W_n + b_1W_{n-1} + b_2W_{n-2} + \cdots + b_qW_{n-q}$$ where $b_1, b_2, \ldots, b_q$ are the model parameters and $W_1, W_2, \ldots$ is a white noise process with variance $\sigma^2$.
+> [!definition] MA(q) Model 
+> The moving average model of order q is a discrete stochastic process that satisfies: $$X_n = W_n + b_1W_{n-1} + b_2W_{n-2} + \cdots + b_qW_{n-q}$$ where $b_1, b_2, \ldots, b_q$ are the model parameters and $W_1, W_2, \ldots$ is a white noise process with variance $\sigma^2$.
 
 > [!info] MA(q) Properties
 > 
@@ -63,7 +65,8 @@
 
 ## ARMA Model
 
-> [!definition] ARMA(p,q) Model The autoregressive moving average model of order (p,q) is a discrete stochastic process that satisfies: $$\Phi(B)X_n = \Theta(B)W_n$$ where $\Phi(z)$ and $\Theta(z)$ are the p and q order characteristic polynomials of the autoregressive and moving average parts, respectively.
+> [!definition] ARMA(p,q) Model 
+> The autoregressive moving average model of order (p,q) is a discrete stochastic process that satisfies: $$\Phi(B)X_n = \Theta(B)W_n$$ where $\Phi(z)$ and $\Theta(z)$ are the p and q order characteristic polynomials of the autoregressive and moving average parts, respectively.
 
 ### Properties
 
@@ -75,7 +78,8 @@
 
 ## ARIMA Model
 
-> [!definition] ARIMA(p,d,q) Model The autoregressive integrated moving average model of order (p,d,q) is a discrete stochastic process that satisfies: $$\Phi(B)D^dX_n = \Theta(B)W_n$$ where $D = 1 - B$ is the differencing operator.
+> [!definition] ARIMA(p,d,q) Model 
+> The autoregressive integrated moving average model of order (p,d,q) is a discrete stochastic process that satisfies: $$\Phi(B)D^dX_n = \Theta(B)W_n$$ where $D = 1 - B$ is the differencing operator.
 
 > [!info] ARIMA Purpose ARIMA combines the strengths of AR and MA models while removing trend in the data through differencing.
 

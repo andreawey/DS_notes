@@ -151,6 +151,11 @@
 - Compute mean and autocovariance for different windows
 - Look for dramatic changes that reject stationarity hypothesis
 
+Conditions for weak stationarity:
+- Constant mean over time
+- constant variance over time
+- covariance depends on the lag, not on time
+
 ## Sample Estimation
 
 ### Sample Mean
