@@ -1,12 +1,17 @@
-Look at BERT 
-review 
+# Lectures
+## Lecture 1: introduction
+- [[NLP Intro & Learning Approaches]]
+- [[NLP Data & Pre-Processing]]
+- [[NLP Tokenization Methods]]
 
-low rank adaptations
-uses SVD 
+## Lecture 2 & 3: text classification
+- [[NLP Text Classification]]
+- [[NLP Sentiment Analysis]]
 
-pruning similar to dropout in dl
+## Lecture 4: non-contextual word vectors
+- [[NLP Vector Space Model (VSM]]
+- [[NLP Text Similarity Metrics]]
+- [[NLP Word Embeddings with Matrix Factorization (LSA & GLOVE)]]
+- [[NLP Word Embeddings with Neural Networks (Word2Vec & Fasttext)]]
 
-
-RLHF
-https://easycloudsolutions.com/2023/03/01/aligning-language-models-to-follow-instructions/
-
+## Lecture 5: statistical models of word sequences

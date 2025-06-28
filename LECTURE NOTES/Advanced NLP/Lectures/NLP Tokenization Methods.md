@@ -97,3 +97,31 @@ Testing mode: tokenize new text
 # SentencePiece
 
 ## SentencePiece: training
+directly operates on raw text without pre-tokenization/pre-splitting
+- Text is considered as a sequence of Unicode characters
+- Whitespace is replaced with "\_"
+- T ext is normalized via Unicode NFKC normalization or custom normalization rules
+Token vocabulary of predefined size is created by BPE or UnigramLM on raw text
+- UnigramLM starts with a large set of candidate subwords and prunes them probabilistically using a likelihood model
+Approach:
+- Does not require language-specific pre-tokenization
+- Is readily applicable for language w/o whitespace-separators (ex. Chinese, Japanese)
+- Improves NMT accuracy and robustness via subword regularization using multiple subword segmentations, ex: "internationalization" -> \[Internation, alization] or \[International, ization]
+
+## SentencePiece: results & testing
+Results of training is a fully self-contained model with no external dependencies
+- Pre-compiled finite state transducer for character normalization
+- vocabulary and segmentation parameters contains
+	- all characters, many frequent words, subwords, UNK for completely new words
+- Vocabulary size is around 32k for T5 and Llama
+Testing mode: tokenize new text
+- Use SentencePiece for tokenization offline and integrate into the pipeline
+- segmentation speed of SentencePiece is fast enough for on-the-fly execution
+
+
+
+>[!INFO] Subword tokenization
+>- Splits text into subword units and reduces vocabulary size compared to word-based tokenization
+>- Effectively handles out-of-vocabulary words and captures certain semantic relationships between words and their variations
+>- Is more complex to implement & produces longer sequences than word-based tokenization
+
