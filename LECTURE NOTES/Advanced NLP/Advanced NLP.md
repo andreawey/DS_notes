@@ -15,3 +15,6 @@
 - [[NLP Word Embeddings with Neural Networks (Word2Vec & Fasttext)]]
 
 ## Lecture 5: statistical models of word sequences
+- [[NLP Statistical modeling of word sequences]]
+
+## Lecture 6: Human-Computer interaction
