@@ -18,3 +18,8 @@
 - [[NLP Statistical modeling of word sequences]]
 
 ## Lecture 6: Human-Computer interaction
+-[[NLP Human-Computer Interaction]]
+
+## Lecture 7 & 8: Language models
+- [[NLP Conditional text generation tasks]]
+- [[NLP N-Gram based language models]]
