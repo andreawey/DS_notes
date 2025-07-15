@@ -9,7 +9,7 @@
 - [[NLP Sentiment Analysis]]
 
 ## Lecture 4: non-contextual word vectors
-- [[NLP Vector Space Model (VSM]]
+- [[NLP Vector Space Model (VSM)]]
 - [[NLP Text Similarity Metrics]]
 - [[NLP Word Embeddings with Matrix Factorization (LSA & GLOVE)]]
 - [[NLP Word Embeddings with Neural Networks (Word2Vec & Fasttext)]]
@@ -23,3 +23,6 @@
 ## Lecture 7 & 8: Language models
 - [[NLP Conditional text generation tasks]]
 - [[NLP N-Gram based language models]]
+- [[NLP Recurrent Neural Networks For Language Modeling]]
+- [[NLP RNNs with attention for machine translation]]
+- [[NLP Transformer]]

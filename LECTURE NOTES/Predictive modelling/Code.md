@@ -1379,7 +1379,7 @@ D: White noise
 ![[Pasted image 20250624202651.png]]
 **(A) MA, (B) AR, (C) RW, (D) WN**
 
-![[Pasted image 20250624203000.png]]
+![[Attention.png]]
 
 Based on the analysis:
 
