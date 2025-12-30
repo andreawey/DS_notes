@@ -102,3 +102,40 @@ To delete a node with key k, we first search for such a node u. if we find it we
 >	else: right child of parent(u) = v
 >```
 
+
+# AVL Trees
+
+>[!FAQ] All operations take O(h) time, where h is the current height of T
+
+Balance factor:
+bf(v) = balance factor of node v = height of left subtree - height of right subtree
+
+A tree is balanced in height if bf(v) is {-1, 0, 1} for every node v
+>[!DANGER] An AVL tree is a search tree balanced in height
+
+an AVL tree with n elements has height O(log n)
+
+## balancing via rotations
+
+![[avl balancing via rotations.png]]
+
+>[!CODE] Insert
+>insert (AVL tree T, node u)
+>1. insert us as in a BST
+>2. v = lowest node on path u-root(T) with absolute balance factor 2
+>3. execute the corresponding rotation on v
+
+insert takes O(log n) time and the AVl tree remains balanced
+
+>[!CODE] Delete
+>delete(AVL tree T, key k)
+>u = search(T,k)
+>if u= null return
+>w = parent(u)
+>delete u as in a BST
+>for each node v on the path P form w to root(T)
+>	if v is unbalanced execute the corresponding rotation on v
+
+delete takes O(log n) time and the AVL tree remains balanced
+
+
